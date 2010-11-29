@@ -15,9 +15,7 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager" verified="true">
-    <list default="true" readonly="true" id="b4699323-d469-47c4-aede-2a9af5f606a6" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" readonly="true" id="b4699323-d469-47c4-aede-2a9af5f606a6" name="Default" comment="" />
     <ignored path="waganote.iws" />
     <ignored path="out/" />
     <ignored path=".idea/workspace.xml" />
