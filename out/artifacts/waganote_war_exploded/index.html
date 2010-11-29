@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <script type="text/javascript">
+        var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+        if (!is_chrome) {
+            alert('Beta version, please use chrome browser!');
+        }
+
+    </script>
+
+    <style type="text/css">
+        div#button {
+            background-image: url(button.jpeg);
+            background-color: #000000;
+            width: 150px;
+            height: 120px;
+            background-size: 100%;
+            background-attachment: initial;
+            background-origin: initial;
+            background-clip: initial;
+            background-color: initial;
+            background-position: initial;
+            background-repeat: no-repeat;
+        }
+
+        a {
+            overflow-x: hidden;
+            overflow-y: hidden;
+            position: absolute;
+            line-height: 600px;
+            top: 90px;
+            height: 122px;
+            left: 10px;
+            width: 200px;
+        }
+    </style>
+
+</head>
+
+<h1>Welcome to Waga Note (谷歌云-浏览器大膏药)</h1>
+
+<p>
+    Beta version note only support Google Chrome browser. Enjoy!
+</p>
+
+<div id="button">
+    <a title="drug button to your browser bookmark bar."
+       href="javascript:void((function(){var e=document.createElement('script');e.setAttribute('src','http://waganote.appspot.com/addNote.js');document.body.appendChild(e);})())">
+        Waga note.
+    </a>
+</div>
+</body>
+</html>
