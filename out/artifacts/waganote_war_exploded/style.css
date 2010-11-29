@@ -22,6 +22,12 @@ div.tnote {
     resize: both;
 }
 
+img.wagaCloseNoteImg {
+    padding-bottom: 6px;
+    width: 10px;
+    height: 10px;
+}
+
 #menuDivWaga {
     bottom: 10px;
     position: fixed;

@@ -1455,7 +1455,7 @@ Note.prototype.mouseDblClick = function() {
     html += "<input id='opacityRange' title='Adjust opacity' value='" + this.opacity + "' onchange='workspace.notes." + this.id +
             ".adjustOpacity();' type='range' min='0.4' max='1' step='0.1' width='50px' onmousedown='event.cancelBubble=true;' onmousemove='event.cancelBubble=true;' />";
 
-    html += "<img onclick='workspace.notes." + this.id
+    html += "<img class='wagaCloseNoteImg' onclick='workspace.notes." + this.id
             + ".destroy(true);' src='http://waganote.appspot.com/close.gif' alt='" + strings.CLOSE_ICON_ALT + "'"
             + " title='" + strings.CLOSE_ICON_TOOLTIP + "'"
             + " style='cursor:auto;border:0;height:12px;width:12px;' />"
