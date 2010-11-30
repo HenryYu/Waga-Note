@@ -760,7 +760,7 @@ function SelectedObjectDrag(note, isGroup)
 
     // set the border color of the notes that are being moved
     var elt;
-    for (n in this.notes)
+    for (var n = 0; n < this.notes.length; n++)
     {
         elt = get(this.notes[n].id);
         elt.style.border = noteBorder + 'px #980000 solid';
@@ -774,8 +774,10 @@ SelectedObjectDrag.prototype.update = function(md)
 {
     var offset = md.curPos.sub(md.downPos);
     var elt;
-    for (n in this.notes) {
+//    for (n in this.notes) {
+    for (var n = 0; n < this.notes.length; n++) {
         elt = get(this.notes[n].id);
+        if(this.notes)
         var newPos = this.notes[n].pos.add(offset);
         elt.style.left = newPos.x + 'px';
         elt.style.top = newPos.y + 'px';
@@ -833,7 +835,7 @@ SelectedObjectDrag.prototype.deselect = function()
     }
     // reset the border color to black
     var elt;
-    for (var n in this.notes)
+    for (var n = 0; n < this.notes.length; n++)
     {
         elt = get(this.notes[n].id);
         elt.style.border = noteBorder + 'px ' + noteBorderColor + ' solid';
@@ -1793,15 +1795,16 @@ function init()
     }
 
     var toolbar = get('toolbar');
-    toolbar.onmousedown = cancelBubble;
-    if (BROWSER_SAFARI == browser) {
-        toolbar.style.width = '100%';
-    }
+//    toolbar.onmousedown = cancelBubble;
+//    if (BROWSER_SAFARI == browser) {
+//        toolbar.style.width = '100%';
+//    }
 
     workspace.mouse.curPos = new Point();
     document.onmousemove = docMouseMove;
     document.onkeydown = docKeyDown;
-    get('content').onmousedown = docMouseDown;
+
+    document.onmousedown = docMouseDown;
     document.onmouseup = docMouseUp;
 
     /**
@@ -1973,3 +1976,6 @@ function getPageSize() {
 function get(id) {
     return document.getElementById(id);
 }
+
+
+init();

@@ -15,16 +15,11 @@
     <option name="historyRevisionsNumber" value="4" />
   </component>
   <component name="ChangeListManager" verified="true">
-    <list default="true" readonly="true" id="b4699323-d469-47c4-aede-2a9af5f606a6" name="Default" comment="1. Edit index.html page.&#10;2. Add readme page.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/webnote.js" afterPath="$PROJECT_DIR$/web/webnote.js" />
+    <list default="true" readonly="true" id="b4699323-d469-47c4-aede-2a9af5f606a6" name="Default" comment=" add full function into test page.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/test.html" afterPath="$PROJECT_DIR$/web/test.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/strings.js" afterPath="$PROJECT_DIR$/web/strings.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/urchin.js" afterPath="$PROJECT_DIR$/web/urchin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/objects.js" afterPath="$PROJECT_DIR$/web/objects.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/huge.js" afterPath="$PROJECT_DIR$/web/huge.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/style.css" afterPath="$PROJECT_DIR$/web/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/wagadb.js" afterPath="$PROJECT_DIR$/web/wagadb.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/waga.js" afterPath="$PROJECT_DIR$/web/waga.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/webnote-full.js" afterPath="$PROJECT_DIR$/web/webnote-full.js" />
     </list>
     <ignored path="waganote.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -84,24 +79,47 @@
   </component>
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
-    <splitter split-orientation="vertical" split-proportion="0.5">
+    <splitter split-orientation="vertical" split-proportion="0.59860384">
       <split-first>
         <leaf>
-          <file leaf-file-name="webnote-full.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="webnote-full.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/web/webnote-full.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="1101" column="30" selection-start="31485" selection-end="31485" vertical-scroll-proportion="0.054237287">
+                <state line="1542" column="24" selection-start="45269" selection-end="45281" vertical-scroll-proportion="-6.1923075">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="test.html" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/web/test.html">
+          <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/web/style.css">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="17" column="65" selection-start="496" selection-end="496" vertical-scroll-proportion="0.47368422">
+                <state line="64" column="32" selection-start="1125" selection-end="1125" vertical-scroll-proportion="0.0">
                   <folding />
                 </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="minixml.gif" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/web/image/minixml.gif">
+              <provider selected="true" editor-type-id="images">
+                <state />
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="test.html" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/web/test.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="35" column="146" selection-start="2133" selection-end="2133" vertical-scroll-proportion="0.76811594">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="close.gif" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/web/image/close.gif">
+              <provider selected="true" editor-type-id="images">
+                <state />
               </provider>
             </entry>
           </file>
@@ -121,7 +139,7 @@
           <file leaf-file-name="webnote.js" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/web/webnote.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="1062" column="20" selection-start="30129" selection-end="30167" vertical-scroll-proportion="0.4">
+                <state line="1472" column="48" selection-start="42659" selection-end="42695" vertical-scroll-proportion="0.2893082">
                   <folding />
                 </state>
               </provider>
@@ -146,14 +164,14 @@
         <option value="$PROJECT_DIR$/web/test/webnoteTest.html" />
         <option value="$PROJECT_DIR$/README" />
         <option value="$PROJECT_DIR$/web/sss.xhtml" />
-        <option value="$PROJECT_DIR$/web/style.css" />
         <option value="$PROJECT_DIR$/web/webnote.js" />
         <option value="$PROJECT_DIR$/web/index.html" />
         <option value="$PROJECT_DIR$/web/util/merge_huge_js.rb" />
         <option value="$PROJECT_DIR$/web/util/merge_huge_js.sh" />
         <option value="$PROJECT_DIR$/web/huge.js" />
-        <option value="$PROJECT_DIR$/web/test.html" />
         <option value="$PROJECT_DIR$/web/webnote-full.js" />
+        <option value="$PROJECT_DIR$/web/style.css" />
+        <option value="$PROJECT_DIR$/web/test.html" />
       </list>
     </option>
   </component>
@@ -210,6 +228,38 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="waganote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="waganote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="waganote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="waganote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="waganote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="image" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -453,7 +503,7 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15204678" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="BSFConsole" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -466,7 +516,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19004893" sideWeight="0.6608187" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18923327" sideWeight="0.8377193" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -544,6 +594,18 @@
           <url>file://$PROJECT_DIR$/web/webnote.js</url>
           <line>259</line>
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/web/webnote-full.js</url>
+          <line>709</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/web/webnote-full.js</url>
+          <line>1802</line>
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/web/webnote-full.js</url>
+          <line>1295</line>
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -552,21 +614,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/addNote.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="4" selection-start="19" selection-end="194" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/bookmark.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="129" selection-start="0" selection-end="166" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/WEB-INF/appengine-web.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="14" selection-start="156" selection-end="156" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/test/wagadbTest.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="4" selection-start="434" selection-end="815" vertical-scroll-proportion="-6.3157897" />
@@ -599,11 +646,6 @@
         <state line="12" column="49" selection-start="356" selection-end="356" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="4" selection-start="738" selection-end="738" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/strings.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="63" column="0" selection-start="2666" selection-end="2666" vertical-scroll-proportion="0.0" />
@@ -611,14 +653,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/huge.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2120" column="8" selection-start="62526" selection-end="62526" vertical-scroll-proportion="0.8826406">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="65" selection-start="496" selection-end="496" vertical-scroll-proportion="0.47368422">
+        <state line="1796" column="23" selection-start="53178" selection-end="53178" vertical-scroll-proportion="-2.7692308">
           <folding />
         </state>
       </provider>
@@ -630,16 +665,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/web/image/close.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/image/new.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/web/webnote.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1062" column="20" selection-start="30129" selection-end="30167" vertical-scroll-proportion="0.4">
+        <state line="1472" column="48" selection-start="42659" selection-end="42695" vertical-scroll-proportion="0.2893082">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/image/minixml.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="32" selection-start="1125" selection-end="1125" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/webnote-full.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1101" column="30" selection-start="31485" selection-end="31485" vertical-scroll-proportion="0.054237287">
+        <state line="1542" column="24" selection-start="45269" selection-end="45281" vertical-scroll-proportion="-6.1923075">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="146" selection-start="2133" selection-end="2133" vertical-scroll-proportion="0.76811594">
           <folding />
         </state>
       </provider>
