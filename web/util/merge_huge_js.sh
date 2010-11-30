@@ -1,0 +1,37 @@
+Quick Start
+
+<<<<<<< HEAD
+1.Drug the button directly into your bookmark bar
+=======
+1.Right click the button, add the link into your browser's bookmark. Or your can drug the button directly into your bookmark bar
+>>>>>>> 7b376ccf2fc31a1cb0b08c3783559e1030fecff7
+2.Please feel free to surf the internet.
+3.Whenever you want to record some feeling or staff, just click the Waga Note on the bookmark bar, and you can add, edit and save notes to write down what you want to do.
+4.When you want to review what you have thought and what once moved you, open the page you once added notes, and click Waga Note and all the notes you added on that page will display.
+
+What are Waga noets' differences
+
+1.Record your thought whenever you want to record without swicthing between apps, windows or tabs.
+2.Review notes whenever you want, just open browser, even there is no network.
+3.Waga Note not only remember your note's text, appearence, but also which page you recorded note, even the position on the page you added the note. That will help you recall what exactly make you write down a note, not only review a note
+4.Easy to use, easy to remove, no side effect.
+5.Stable storage strategy, don't concern lose your data unless you restore Operation system or clear the data of browser.
+6.Easy to extend, we will add more features into Waga note, including synchronize identity management, data to server, send notes with email .etc.Quick Start
+
+<<<<<<< HEAD
+1.Drug the button directly into your bookmark bar
+=======
+1.Right click the button, add the link into your browser's bookmark. Or your can drug the button directly into your bookmark bar
+>>>>>>> 7b376ccf2fc31a1cb0b08c3783559e1030fecff7
+2.Please feel free to surf the internet.
+3.Whenever you want to record some feeling or staff, just click the Waga Note on the bookmark bar, and you can add, edit and save notes to write down what you want to do.
+4.When you want to review what you have thought and what once moved you, open the page you once added notes, and click Waga Note and all the notes you added on that page will display.
+
+What are Waga noets' differences
+
+1.Record your thought whenever you want to record without swicthing between apps, windows or tabs.
+2.Review notes whenever you want, just open browser, even there is no network.
+3.Waga Note not only remember your note's text, appearence, but also which page you recorded note, even the position on the page you added the note. That will help you recall what exactly make you write down a note, not only review a note
+4.Easy to use, easy to remove, no side effect.
+5.Stable storage strategy, don't concern lose your data unless you restore Operation system or clear the data of browser.
+6.Easy to extend, we will add more features into Waga note, including synchronize identity management, data to server, send notes with email .etc.
