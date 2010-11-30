@@ -24,3 +24,5 @@ String.format = function(src){
         return args[i];
     });
 };
+
+//waga script end

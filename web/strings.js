@@ -59,3 +59,6 @@ var strings = {
   // $1 is the email address of the admin
   SAVE_SERVER_ERROR: 'Failed to save notes.  There is a problem with the server.  Please try again in a few minutes.  If the problem persists, please send an email to $1.'
 };
+
+
+//strings script end
