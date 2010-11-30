@@ -15,6 +15,7 @@
 
 //    var baseUrl = "http://10.18.3.156:8080"
     var baseUrl = "http://waganote.appspot.com"
+//    var baseUrl = "http://localhost:8888/waganote"
 
     var cssWaga = document.createElement('link');
     cssWaga.setAttribute("href", baseUrl + "/style.css");

@@ -33,6 +33,12 @@ img.wagaCloseNoteImg {
     right: 2px;
 }
 
+#toolBarDivWaga {
+    bottom: 50px;
+    position: fixed;
+    right: 2px;
+}
+
 #menuDivWaga>ul {
     list-style-type: none;
 }

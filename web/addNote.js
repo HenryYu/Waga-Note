@@ -14,19 +14,20 @@
     }
 
 //    var baseUrl = "http://10.18.3.156:8080"
-    var baseUrl = "http://waganote.appspot.com"
+//    var baseUrl = "http://waganote.appspot.com"
+    var baseUrl = "http://localhost:8888/waganote"
 
-    var cssWaga = document.createElement('link');
-    cssWaga.setAttribute("href", baseUrl + "/style.css");
-    cssWaga.setAttribute("rel", "stylesheet")
-    cssWaga.setAttribute("type", "text/css")
-    document.body.appendChild(cssWaga);
+        var cssWaga = document.createElement('link');
+        cssWaga.setAttribute("href", baseUrl + "/style.css");
+        cssWaga.setAttribute("rel", "stylesheet")
+        cssWaga.setAttribute("type", "text/css")
+        document.body.appendChild(cssWaga);
 
-    var hugeJSWaga = document.createElement('script');
-    hugeJSWaga.setAttribute('src', baseUrl + '/huge.js')
-    document.body.appendChild(hugeJSWaga);
-
-    return;
+//    var hugeJSWaga = document.createElement('script');
+//    hugeJSWaga.setAttribute('src', baseUrl + '/huge.js')
+//    document.body.appendChild(hugeJSWaga);
+//
+//    return;
 
     var objectsJSWaga = document.createElement('script');
     objectsJSWaga.setAttribute('src', baseUrl + '/objects.js')
@@ -45,7 +46,7 @@
     document.body.appendChild(wagaJSWaga);
 
     var wagaNoteJSWaga = document.createElement('script');
-    wagaNoteJSWaga.setAttribute("src", baseUrl + '/webnote.js');
+    wagaNoteJSWaga.setAttribute("src", baseUrl + '/webnote-full.js');
     document.body.appendChild(wagaNoteJSWaga);
 
     var wagaDBJSWaga = document.createElement('script');

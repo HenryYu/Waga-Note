@@ -242,7 +242,33 @@
         menuUlWaga.appendChild(saveLiWaga);
         menuUlWaga.appendChild(clearLiWaga);
 
-})();    
+
+
+        var tooBarDivWaga = document.createElement('div');
+        tooBarDivWaga.id = 'toolBarDivWaga';
+        document.body.insertBefore(tooBarDivWaga, document.body.firstChild);
+
+        tooBarDivWaga.innerHTML = '<div id="toolbar">' +
+                                  '<div class="controls">' +
+                                  '<img title="new note" id="newImg" src="image/new.gif" class="controls" onclick="workspace.createNote()" alt="new note icon">' +
+                                  '<img title="save workspace" id="saveImg" src="image/save.gif" class="controls" onclick="workspace.save()" alt="disk icon (save)">' +
+                                  '<img title="load previous version" id="reloadImg" src="image/reload.gif" class="controls" onclick="workspace.loadlist()" alt="reload icon">' +
+                                  '<img title="delete note (14 actions)" id="undoImg" src="image/undo.gif" class="controls" onclick="workspace.history.undo()" alt="undo icon">' +
+                                  '<img title="nothing to redo" id="redoImg" src="image/redo.gif" class="controlsDisabled" onclick="workspace.history.redo()" alt="redo icon">' +
+                                  '</div>' +
+                                  '<div id="filters">' +
+                                  '<input title="enter a regular expression to filter by" style="width: 135px; padding: 1px 2px;" id="textfilter" onchange="workspace.filter(this.value)" onkeydown="if(13==event.keyCode){workspace.filter(this.value);}; event.cancelBubble=true;">' +
+                                  '<input style="width: 50px;" value="filter" type="button">' +
+                                  '</div>' +
+                                  '<div style="width: 51px;" title="showing all 1 notes" id="mini">' +
+                                  '</div>' +
+                                  '<div id="links">' +
+                                  '<a title="rss feed of these notes" id="rsslink" href="http://www.aypwip.org/webnote/waga.xml"><img style="margin: 6px 2px; border: 0pt none; width: 19px; height: 9px;" src="image/minixml.gif"></a>' +
+                                  '</div>' +
+                                  '<div id="wsname">waga</div>' +
+                                  '</div>';
+})();
+
 
 
 //wagadb script end

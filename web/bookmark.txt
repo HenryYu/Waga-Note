@@ -1,1 +1,2 @@
 javascript:void((function(){var%20e=document.createElement('script');e.setAttribute('src','http://waganote.appspot.com/addNote.js');document.body.appendChild(e);})())
+javascript:void((function(){var%20e=document.createElement('script');e.setAttribute('src','http://localhost:8888/waganote/addNote.js');document.body.appendChild(e);})())

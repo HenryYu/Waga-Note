@@ -59,3 +59,12 @@ input, select {
     border: 1px #000 solid;
 }
 
+div.mininote {
+  width: 6px;
+  height: 7px;
+  border: 1px #000 solid;
+  margin: 1px 1px 2px 1px;
+  float: left;
+  font-size: 1px;
+}
+
