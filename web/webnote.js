@@ -630,10 +630,9 @@ var Mouse =
         if (this.selObj) // something already selected
             return;
 
-        if (get(note.id).style.cursor != "move")
-        //      this.selObj = new SelectedObjectResize(note, this.notePosRel);
-            console.log('yong css3');
-        else
+        if (get(note.id).style.cursor != "move"){
+            this.selObj = new SelectedObjectResize(note, this.notePosRel);
+        }else
         {
             if (ev.altKey)
             {

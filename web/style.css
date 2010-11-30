@@ -19,7 +19,6 @@ div.tnote {
     opacity: 0.6;
     filter: alpha(opacity = 60);
     z-index: 900;
-    resize: both;
 }
 
 img.wagaCloseNoteImg {
@@ -36,10 +35,6 @@ img.wagaCloseNoteImg {
 
 #menuDivWaga>ul {
     list-style-type: none;
-}
-
-#opacityRange {
-    width: 75px;
 }
 
 div.wagaNote {
