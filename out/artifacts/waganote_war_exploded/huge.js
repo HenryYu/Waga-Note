@@ -1195,7 +1195,7 @@ function _uNx() {
 // user options
 var debugOn = 0;
 var notePadding = 5;
-var noteBorder = 2;
+var noteBorder = 3;
 var noteBorderColor = '#000';
 var miniWidth = 51;
 var exposeSize = "70";
@@ -1290,9 +1290,25 @@ function Note(note, p, text) {
      */
     this.size = new Point(parseInt(note.style.width), parseInt(note.style.height));
 
+    // create the mini note dom object
+    var dotElt = document.createElement('div');
+    dotElt.id = 'm' + this.id;
+    dotElt.onmousedown = hitch(this, this.miniMouseDown);
+
+
+    var link = document.createElement('A');
+    link.href = '#' + note.id;
+
+    link.appendChild(dotElt);
+    get('mini').appendChild(link);
+
+    var dot = get('m' + this.id);
+    dot.className = 'mininote';
+    dot.style.backgroundColor = note.style.backgroundColor;
+//    dot.innerHTML = '<a style="" href="#' + note.id + '" >' + note.id +  ' </a>';
+
     // call methods
-    this.setColor(note.style.backgroundColor);
-    this.setOpacity(note.style.opacity);
+    this.setColor(note.style.backgroundColor, true);
     this.setText(text);
     this.updateSize();
 }
@@ -1342,6 +1358,33 @@ Note.prototype.mouseDown = function(ev) {
     return false;
 }
 
+/**
+ * User clicked on one of the mini notes at the top of the page.
+ */
+Note.prototype.miniMouseDown = function(ev)
+{
+    ev = ev || window.event;
+    // bring all notes of the same color to the front
+    if (ev.ctrlKey) {
+        for (var n in this.parent.notes) {
+            var note = this.parent.notes[n];
+            if (note != this && note.bgColor.toString() == this.bgColor.toString())
+                note.select();
+        }
+    } else if (ev.shiftKey) {
+        workspace.filter(strings.COLOR + ":" + colorMap[this.bgColor.toString()]);
+    }
+    this.select();
+
+    // bring it back if it's off screen
+    var size = this.getCorrectedSize();
+    var pos = this.getPosition();
+    var elt = get(this.id);
+    if (size.x + pos.x < 5)
+        elt.style.left = "1px";
+    if (size.y + pos.y < 5)
+        elt.style.top = "1px";
+}
 /**
  * User deselected a note (stopped dragging).
  */
@@ -1445,8 +1488,6 @@ Note.prototype.mouseDblClick = function() {
     pSize.y -= 2 * (noteBorder + notePadding + 1) + 20;
     var html = "<div style='text-align:right;margin: 0 2px 1px 0;'>"
 
-    var rangleWidth = pSize.x - 175;
-
     // color swatches here
     for (var c in bgColors) {
         var tooltip = strings.COLOR_SWATCH_TOOLTIP.replace('$1', parseInt(c, 10) + 1);
@@ -1457,14 +1498,10 @@ Note.prototype.mouseDblClick = function() {
                 + tooltip + "'></div>";
     }
 
-    html += "<input id='opacityRange' title='Adjust opacity' value='" + this.opacity + "' onchange='workspace.notes." + this.id +
-            ".adjustOpacity();' type='range' min='0.4' max='1' step='0.1' style='width:" + rangleWidth +
-            "px;padding-bottom:2px;' onmousedown='event.cancelBubble=true;' onmousemove='event.cancelBubble=true;' />";
-
     html += "<img onclick='workspace.notes." + this.id
-            + ".destroy(true);' src='http://waganote.appspot.com/close.gif' alt='" + strings.CLOSE_ICON_ALT + "'"
+            + ".destroy(true);' src='http://localhost:8080/image/close.gif' alt='" + strings.CLOSE_ICON_ALT + "'"
             + " title='" + strings.CLOSE_ICON_TOOLTIP + "'"
-            + " style='cursor:auto;border:1;height:10px;width:10px;padding-bottom:8px;' />"
+            + " style='cursor:auto;border:0;height:12px;width:12px;' />"
             + "</div><textarea wrap='virtual' id='"
             + this.id + "text' style='width:" + pSize.x
             + "px;height:" + pSize.y + "px' onmousedown='event.cancelBubble=true;' ondblclick='event.cancelBubble=true;'>"
@@ -1477,12 +1514,6 @@ Note.prototype.mouseDblClick = function() {
     get(this.id + 'text').focus();
     this.parent.edit = this;
 }
-
-Note.prototype.adjustOpacity = function()
-{
-    this.setOpacity(get('opacityRange').value);
-}
-
 /**
  * Destroy the note (user clicked on the X).
  * @param {boolean} addToHistory should we add information to the undo
@@ -1526,12 +1557,19 @@ Note.prototype.destroy = function(addToHistory)
     // now delete the html node
     elt.parentNode.removeChild(elt);
 
+    // delete the mini html node
+    elt = get('m' + this.id);
+    elt.parentNode.removeChild(elt);
+
     // remove it from the array of notes
     delete this.parent.notes[this.id];
     this.parent.numNotes--;
     this.parent.changed = true;
 
-    this.parent.deleteNotes.push(this);
+    // resize the mini box and update the stats
+    this.parent.updateMiniBox();
+
+    // is the garbage collector smart enough to delete the object now?
 }
 /**
  * Get the coordinates of the upper left corner of the note.
@@ -1574,23 +1612,38 @@ Note.prototype.getCorrectedSize = function() {
  * @param {boolean} ignoreHistory should we add it to the history?
  * Different default values makes this inconsistent with {@link #destroy}
  */
-Note.prototype.setColor = function(hex)
+Note.prototype.setColor = function(hex, ignoreHistory)
 {
-    this.bgColor = new Color(hex);
+    var newColor = new Color(hex);
+
+    if (!ignoreHistory)
+    {
+        var f = {
+            title : strings.HISTORY_DELETE_NOTE,
+            note : this,
+            ucolor : this.bgColor,
+            rcolor : newColor,
+            undo : function()
+            {
+                this.note.setColor(this.ucolor.toString(), true);
+            },
+            redo : function()
+            {
+                this.note.setColor(this.rcolor.toString(), true);
+            }
+        }
+        this.parent.history.add(f);
+    }
+
+    this.bgColor = newColor;
 
     var elt = get(this.id);
     if (this.parent.mouse.noteOver && this.parent.mouse.noteOver == this)
         elt.style.background = (new Color(this.bgColor.toString())).hsvadj(0, 0, -0.1);
     else
         elt.style.background = this.bgColor.toString();
-}
 
-
-Note.prototype.setOpacity = function(opa) {
-    this.opacity = opa;
-
-    var elt = get(this.id);
-    elt.style.opacity = opa;
+    get('m' + this.id).style.background = this.bgColor;
 }
 /**
  * Convert the text of a note to html.  We perform a simple transform of
@@ -1631,6 +1684,22 @@ Note.prototype.getHTML = function() // wikification
     return lines.join('');
 }
 /**
+ * Generate the xml representing a note (used when we save notes).
+ * @type string
+ */
+Note.prototype.toXML = function()
+{
+    var ret = "<note noteid='" + this.id + "'";
+    ret += " bgcolor='" + this.bgColor + "'";
+    ret += " xposition='" + this.getPosition().x + "'";
+    ret += " yposition='" + this.getPosition().y + "'";
+    ret += " height='" + this.getSize().y + "'";
+    ret += " width='" + this.getSize().x + "'";
+    ret += " zindex='" + get(this.id).style.zIndex + "'";
+    ret += ">\n" + escape(this.text) + "\n";
+    return ret + "</note>"
+}
+/**
  * Change the text of a note.
  * @param {string} str the text for the note.
  */
@@ -1669,7 +1738,7 @@ Note.prototype.setText = function(str)
     }
 
     elt.title = strings.NOTE_TOOLTIP;
-    //  get('m' + this.id).title = str;
+    get('m' + this.id).title = str;
 }
 /**
  * We keep track of the size of the note internally; this method updates
@@ -1719,8 +1788,8 @@ Note.prototype.select = function()
     d.style.zIndex = 1000;
     d.style.backgroundColor = '#fff';
     d.style.padding = '4px';
-    d.style.opacity = 0.4;
-    //  get('content').appendChild(d);
+    d.style.opacity = 0.8;
+    get('content').appendChild(d);
 
     setTimeout(function() {
         elt.style.backgroundColor = self.bgColor.toString();
@@ -1816,9 +1885,9 @@ var Mouse =
         if (this.selObj) // something already selected
             return;
 
-        if (get(note.id).style.cursor != "move"){
+        if (get(note.id).style.cursor != "move")
             this.selObj = new SelectedObjectResize(note, this.notePosRel);
-        }else
+        else
         {
             if (ev.altKey)
             {
@@ -1883,7 +1952,6 @@ function SelectedObjectDrag(note, isGroup)
 
     // set the border color of the notes that are being moved
     var elt;
-    //  for (n in this.notes)
     for (var n = 0; n < this.notes.length; n++)
     {
         elt = get(this.notes[n].id);
@@ -1898,10 +1966,11 @@ SelectedObjectDrag.prototype.update = function(md)
 {
     var offset = md.curPos.sub(md.downPos);
     var elt;
-    //  for (n in this.notes) {
+    //    for (n in this.notes) {
     for (var n = 0; n < this.notes.length; n++) {
         elt = get(this.notes[n].id);
-        var newPos = this.notes[n].pos.add(offset);
+        if (this.notes)
+            var newPos = this.notes[n].pos.add(offset);
         elt.style.left = newPos.x + 'px';
         elt.style.top = newPos.y + 'px';
         if (BROWSER_MOZILLA == browser) {
@@ -1958,10 +2027,9 @@ SelectedObjectDrag.prototype.deselect = function()
     }
     // reset the border color to black
     var elt;
-    //  for (var n in this.notes)
-    for (var i = 0; i < this.notes.length; i++)
+    for (var n = 0; n < this.notes.length; n++)
     {
-        elt = get(this.notes[i].id);
+        elt = get(this.notes[n].id);
         elt.style.border = noteBorder + 'px ' + noteBorderColor + ' solid';
     }
 };
@@ -2044,8 +2112,6 @@ SelectedObjectResize.prototype.update = function(md)
         edit.style.width = Math.max(pSize.x, 10) + 'px';
     }
 
-//    get('opacityRange').style.width = (parseInt(elt.style.width) - 175) + 'px';
-
     this.note.updateSize();
 };
 /**
@@ -2118,7 +2184,7 @@ var History =
         this.undoStack.push(funcPtr);
         if (this.undoStack.length > this.maxSize)
             this.undoStack.shift();
-        this.updateTitles();
+        //    this.updateTitles();
     },
     /**
      * Undo the last action and move an item from the undo stack to the
@@ -2131,7 +2197,7 @@ var History =
             var f = this.undoStack.pop();
             this.redoStack.push(f);
             f.undo();
-            this.updateTitles();
+            //      this.updateTitles();
         }
     },
     /**
@@ -2144,7 +2210,7 @@ var History =
             var f = this.redoStack.pop();
             this.undoStack.push(f);
             f.redo();
-            this.updateTitles();
+            //      this.updateTitles();
         }
     },
     /**
@@ -2153,11 +2219,6 @@ var History =
     updateTitles : function()
     {
         var elt = get('undoImg');
-
-        if (elt == null) {
-            return;
-        }
-
         if (0 == this.undoStack.length)
         {
             elt.title = strings.HISTORY_UNDO_EMPTY;
@@ -2169,8 +2230,8 @@ var History =
         {
             var tooltip = this.undoStack.length == 1 ? strings.HISTORY_UNDO_TOOLTIP
                     : strings.HISTORY_UNDO_TOOLTIPS;
-            //      elt.title = tooltip.replace("$1", this.undoStack[this.undoStack.length-1].title)
-            //                         .replace("$2", this.undoStack.length);
+            elt.title = tooltip.replace("$1", this.undoStack[this.undoStack.length - 1].title)
+                    .replace("$2", this.undoStack.length);
             elt.className = 'controls';
             elt = get('saveImg');
             elt.className = 'controls';
@@ -2201,11 +2262,11 @@ var NotePos =
     /**
      * @type int
      */
-    x : firstNotXpos,
+    x : 170,
     /**
      * @type int
      */
-    y : firstNotYpos,
+    y : 40,
     /**
      * Compute the position of a new note given the size of the note.
      * @param {int} w the width of the new note
@@ -2244,10 +2305,6 @@ var workspace =
     freshNotes : [],
 
     deleteNotes: [],
-
-    baseZIndex : 900,
-
-    db: {},
     /**
      * When creating new notes, we sometimes need to assign a random name to
      * it.  The first random note is note0, the second is note1, etc.
@@ -2330,10 +2387,7 @@ var workspace =
     createNote : function(note, skipFilter) {
         if (!note)
             note = {};
-
-        var isNewNote = false
         if (!('id' in note)) {
-            isNewNote = true;
             note.id = "note" + this.nextNoteNum;
 
             // a new note is being made, save information to the undo stack
@@ -2355,8 +2409,7 @@ var workspace =
                     self.nextNoteNum++;
                 }
             };
-
-            //      this.history.add(f);
+            this.history.add(f);
 
             this.nextNoteNum++;
         }
@@ -2368,13 +2421,15 @@ var workspace =
             return note;
         }
 
-        if (!('height' in note) || note.height == null) note.height = 150;
-        if (!('width' in note) || note.width == null) note.width = 250;
-        
+        if (!('height' in note)) note.height = 150;
+        if (!('width' in note)) note.width = 250;
+
         var pos;
         if (!('xPos' in note) || !('yPos' in note)) {
             pos = this.notePos.nextPos(note.width, note.height);
-            //      var content = get('content');
+
+
+            var content = get('content');
             pos.x += parseInt(document.body.scrollLeft);
             pos.y += parseInt(document.body.scrollTop);
         }
@@ -2383,19 +2438,23 @@ var workspace =
 
         if (!('bgcolor' in note)) note.bgcolor = bgColors[0].toString();
 
-        if (!('text' in note) || note.text == null) note.text = '';
-        if (!('opacity' in note)) note.opacity = '0.9';
-
+        if (!('text' in note)) note.text = '';
 
         // disable editing of a different note
         this.editOff();
 
         var newDiv = document.createElement('div');
-        newDiv.className = 'wagaNote';
+        newDiv.className = 'note';
         newDiv.id = note.id;
+        // work around a safari bug
+        if (BROWSER_SAFARI == browser) {
+            newDiv.style.opacity = '0.99';
+            newDiv.style.overflow = 'hidden';
+        }
 
-        document.body.insertBefore(newDiv, document.body.firstChild);
+        document.body.appendChild(newDiv);
 
+        //document.body.innerHTML += newDiv;
         var elt = get(note.id);
         elt.style.backgroundColor = note.bgcolor;
         elt.style.width = note.width + 'px';
@@ -2405,14 +2464,10 @@ var workspace =
         elt.style.padding = notePadding + 'px';
         elt.style.position = 'absolute';
         elt.style.border = noteBorder + 'px ' + noteBorderColor + ' solid';
-        elt.style.resize = 'both';
-
-        elt.style.opacity = note.opacity;
-
 
         if (!('zIndex' in note)) {
             this.reZOrder();
-            elt.style.zIndex = this.baseZIndex + this.numNotes + 1;
+            elt.style.zIndex = this.numNotes + 1;
             this.topId = note.id;
         } else {
             elt.style.zIndex = note.zIndex;
@@ -2429,6 +2484,8 @@ var workspace =
         var nNote = new Note(elt, this, note.text);
         this.notes[nNote.id] = nNote;
 
+        workspace.appendAnchor(nNote);
+
         newDiv.onmouseover = hitch(nNote, nNote.mouseOver);
         newDiv.onmouseout = hitch(nNote, nNote.mouseOut);
         newDiv.onmousedown = hitch(nNote, nNote.mouseDown);
@@ -2438,22 +2495,36 @@ var workspace =
         newDiv.onselectstart = retFalse;
         newDiv.title = strings.NOTE_TOOLTIP;
 
+        if (!skipFilter) {
+            this.filter('');
+        } else {
+            // this normally gets called by filter
+            workspace.updateMiniBox();
+        }
+
         return nNote;
     },
 
-    destroyAllNotes : function() {
-//        for (var i = 0; i < this.nextNoteNum; i++) {
-//            var note = workspace.notes['note' + i];
-//            if(note != null) note.destroy();
-//        }
+    appendAnchor : function(note) {
+        var anchor = document.createElement('A');
+        anchor.name = note.id;
+        anchor.style.display = 'none';
+        get(note.id).appendChild(anchor);
+    },
 
-        for ( var note in workspace.notes) {
+
+    /**
+     * Destory all notes on workspace.
+     */
+    destroyAllNotes : function() {
+        for (var note in workspace.notes) {
             workspace.notes[note].destroy();
         }
 
         this.freshNotes = [];
         this.deleteNotes = [];
     },
+
     /**
      * Mouse up action on the workspace.
      */
@@ -2470,9 +2541,8 @@ var workspace =
         if (this.mouseDown) {
             var offX = this.mouseDown.x - x;
             var offY = this.mouseDown.y - y;
-            //      var content = get('content');
-            //      content.scrollTop += offY;
-            //      content.scrollLeft += offX;
+            document.body.scrollTop += offY;
+            document.body.scrollLeft += offX;
             this.mouseDown.x = x;
             this.mouseDown.y = y;
         }
@@ -2538,13 +2608,25 @@ var workspace =
             for (i = 0; i < nArray.length; ++i) {
                 if (nArray[i].id == topNoteID) {
                     found = 1;
-                    get(nArray[i].id).style.zIndex = this.baseZIndex + this.numNotes;
+                    get(nArray[i].id).style.zIndex = this.numNotes;
                     this.topId = nArray[i].id;
-                } else {
-                    get(nArray[i].id).style.zIndex = this.baseZIndex + i + 1 - found;
                 }
+                else
+                    get(nArray[i].id).style.zIndex = i + 1 - found;
             }
         }
+    },
+
+    /**
+     * Set the name of the workspace.  NOTE: this changes where notes get
+     * saved.
+     * @param {string} n the new name
+     */
+    setName : function(n)
+    {
+        this.name = n;
+        var elt = get('wsname');
+        elt.innerHTML = this.name;
     },
 
     /**
@@ -2612,6 +2694,213 @@ var workspace =
     },
 
     /**
+     * Filter the visible notes (kind of like a search).  Notes that match
+     * the regular expression are moved to the front while other notes are
+     * disabled and become mostly transparent.
+     * @param {string} text the regular expression to filter by
+     */
+    filter : function(text) {
+        var shouldHide;
+        if (text.trim().indexOf(strings.COLOR + ":") == 0) {
+            var color = text.trim().substring(strings.COLOR.length + 1);
+            shouldHide = function(note) {
+                return (colorMap[note.bgColor.toString()] == color);
+            };
+        }
+        else {
+            var reg = new RegExp(text, 'i');
+            shouldHide = function(note) {
+                return reg.test(note.text);
+            };
+        }
+
+        for (n in this.notes) {
+            var note = this.notes[n];
+            var elt = get(note.id);
+            if (shouldHide(note)) {
+                elt.className = 'note';
+                if (BROWSER_SAFARI == browser) elt.style.opacity = '0.99';
+                if (BROWSER_IE_5 == browser) elt.style.visibility = 'visible';
+                note.enable();
+                get('m' + note.id).className = 'mininote';
+            } else {
+                elt.className = 'noteHide';
+                elt.style.zIndex = 0;
+                if (BROWSER_SAFARI == browser) elt.style.opacity = '0.2';
+                if (BROWSER_IE_5 == browser) elt.style.visibility = 'hidden';
+                note.disable();
+                get('m' + note.id).className = 'mininote noteHide';
+            }
+        }
+        get('textfilter').value = text;
+        this.reZOrder();
+        this.updateMiniBox();
+    },
+    /**
+     * Update the background color and tool tips of the mini notes.
+     */
+    updateMiniBox : function() {
+        var mini = get('mini');
+        var vNotes = 0;
+        var total = 0;
+
+        for (n in this.notes) {
+            ++total;
+            if (get('m' + n).className.indexOf("noteHide") == -1)
+                ++vNotes;
+        }
+
+        // Set the width of the mini div.
+        // After the first 9 notes, we add space for additional notes
+        // 10 is the width of a note.
+        var miniNoteWidth = 10;
+        if (BROWSER_IE_5 == browser) miniNoteWidth = 8; // width in IE5.5
+        var diff = parseInt(Math.max(0, total - 9) / 2) * miniNoteWidth;
+        mini.style.width = (diff + miniWidth) + 'px';
+
+        if (0 == total)
+            mini.title = strings.MINI_NO_NOTES;
+        else if (vNotes == total)
+            mini.title = strings.MINI_SHOWING_ALL.replace("$1", total);
+        else if (0 == vNotes)
+            mini.title = strings.MINI_HIDING_ALL.replace("$1", total);
+        else {
+            mini.title = strings.MINI_SHOWING_PARTIAL
+                    .replace("$1", vNotes)
+                    .replace("$2", total);
+        }
+    },
+    /**
+     * Create the "load old notes" note.
+     * @param {int} offset how many saves do we want to go back?
+     */
+    loadlist : function(offset) {
+        if (!offset)
+            offset = 0;
+
+        var xmlhttp = getxmlreqobj();
+        xmlhttp.onreadystatechange = function() {
+            if (4 == xmlhttp.readyState && 200 == xmlhttp.status) {
+                workspace.loadlistCallback(xmlhttp, offset);
+            }
+            if (4 == xmlhttp.readyState) {
+                try { // break circular ref
+                    xmlhttp.onreadystatechange = null;
+                } catch (e) {
+                }
+            }
+        };
+        this.createNote({
+            'id' : 'load',
+            'height' : '130',
+            'width' : '270',
+            'bgcolor' : '#ffff30'
+        });
+        var txt = strings.LOADVERSIONS_INIT;
+        this.notes['load'].setText(txt);
+        this.reZOrder('load');
+
+        xmlhttp.open('GET', 'getdates.py?name=' + escape(escape(this.name))
+                + '&offset=' + offset, true);
+        xmlhttp.send('');
+    },
+
+    loadlistCallback : function(xmlhttp, offset) {
+        var loadTimes = xmlhttp.responseText.split('|');
+        this.createNote({
+            'id': 'load',
+            'height': '130',
+            'width': '270',
+            'bgcolor': '#ffff30'
+        });
+        var txt;
+        db('resp: ' + xmlhttp.responseText.trim());
+        db('resplen: ' + xmlhttp.responseText.trim().length);
+        if (xmlhttp.responseText.trim() == '') {
+            txt = this.notes['load'].text + '\n' + strings.LOADVERSIONS_NONE;
+        } else {
+            txt = strings.LOADVERSIONS_ABOUT
+                    + '<div style="text-align: center;"><form method="GET" action="load.py" onmousedown="event.cancelBubble=true;">'
+                    + '<input type="hidden" name="name" value="'
+                    + escape(this.name) + '" /><select class="loadfrm" name="time">';
+            for (var i = 0; i < loadTimes.length && i < numDates; i++) {
+                txt += "<option value='" + loadTimes[i].trim() + "'>"
+                        + (new MyDate(loadTimes[i])) + "</option>";
+            }
+
+            txt += "</select><input type='submit' value='load' /><br /><span style='font-size: 0.8em;'>";
+
+            if (loadTimes.length > numDates)
+            {
+                txt += "&laquo; <a class='fakelink' onclick='workspace.loadlist("
+                        + (offset + numDates) + ")'>" + strings.LOADVERSIONS_OLDER + "</a> ";
+                if (offset > 0)
+                    txt += "| ";
+            }
+            if (offset > 0) {
+                txt += "<a class='fakelink' onclick='workspace.loadlist("
+                        + (offset - numDates) + ")'>" + strings.LOADVERSIONS_NEWER + "</a> &raquo;";
+            }
+
+            txt += "<br />" + strings.LOADVERSIONS_DATE_NOTE + "</span></div>";
+        }
+        this.notes['load'].setText(txt);
+        this.reZOrder('load');
+    },
+
+    /**
+     * Checks to see if the notes have changed since the last time we loaded
+     * the notes.
+     */
+    checkUpdated : function() {
+        var xmlhttp = getxmlreqobj();
+        xmlhttp.onreadystatechange = function() {
+            if (4 == xmlhttp.readyState && 200 == xmlhttp.status) {
+                db('check updated');
+                workspace.checkUpdatedCallback(xmlhttp);
+            }
+            if (4 == xmlhttp.readyState) {
+                try { // break circular ref
+                    xmlhttp.onreadystatechange = null;
+                } catch (e) {
+                }
+            }
+        };
+        xmlhttp.open('GET', 'getrecent.py?name=' + escape(escape(workspace.name)), true);
+        xmlhttp.send('');
+    },
+
+    checkUpdatedCallback : function(xmlhttp) {
+        var loadTime = xmlhttp.responseText.trim();
+        if (loadTime > this.loadedTime) {
+            this.createNote({
+                'id' : 'updated',
+                'xPos' : '0',
+                'yPos' : '40',
+                'bgcolor' : '#ff6060',
+                'height' : '100',
+                'text' : strings.COLLISION_WARNING.replace("$1", escape(escape(escape(this.name))))
+            });
+        } else {
+            db('no changes');
+            window.setTimeout(workspace.checkUpdated, workspace.updateInterval);
+        }
+    },
+
+    /**
+     * Generate the xml representation of the workspace (used when saving).
+     * @type string
+     */
+    toString : function()
+    {
+        var ret = "<workspace name='" + escape(this.name) + "'";
+        ret += " nextNoteNum='" + this.nextNoteNum + "'";
+        ret += ">\n";
+        for (nid in this.notes)
+            ret += this.notes[nid].toXML() + "\n";
+        return ret + "</workspace>"
+    },
+    /**
      * Get the next (or previous) note relative to the top note.
      * @param {int} diff The offset from the top note (positive mean
      * below and negative mean up from the bottom note).
@@ -2633,6 +2922,51 @@ var workspace =
             noteArr.push(this.notes[n]);
         }
         noteArr[ (maxNote + diff + noteArr.length) % noteArr.length ].select();
+    },
+    /**
+     * Save the workspace.
+     */
+    save : function()
+    {
+        // there have to be changes to the workspace before saving is enabled
+        var s = get('saveImg');
+        if (s.className == 'controlsDisabled')
+            return;
+
+        s.src = 'images/saving.gif';
+        this.editOff();
+
+        var xmlhttp = getxmlreqobj();
+        xmlhttp.onreadystatechange = function() {
+            if (4 == xmlhttp.readyState && 200 == xmlhttp.status) {
+                workspace.saveCallback(xmlhttp);
+            } else if (4 == xmlhttp.readyState) {
+                db(xmlhttp.status);
+                alert(strings.SAVE_STATUS_ERROR);
+                get('saveImg').src = 'images/save.gif';
+            }
+            if (4 == xmlhttp.readyState) {
+                try { // break circular ref
+                    xmlhttp.onreadystatechange = null;
+                } catch (e) {
+                }
+            }
+        };
+
+        xmlhttp.open('POST', 'save.py', true);
+        xmlhttp.send(workspace.toString());
+    },
+    saveCallback : function(xmlhttp) {
+        var doc = xmlhttp.responseXML;
+        db("response: " + xmlhttp.responseText);
+        if (doc && 'ok' == doc.getElementsByTagName('status')[0].getAttribute('value')) {
+            this.changed = false;
+            get('saveImg').className = 'controlsDisabled';
+            this.loadedTime = doc.getElementsByTagName('status')[0].getAttribute('update');
+        } else {
+            alert(strings.SAVE_SERVER_ERROR.replace("$1", adminEmail));
+        }
+        get('saveImg').src = 'images/save.gif';
     }
 };
 
@@ -2641,13 +2975,44 @@ var workspace =
 ///
 
 /**
+ * Write a message to the debug textarea.
+ * @param {string} msg the message to display
+ */
+function db(msg) {
+    if (debugOn) {
+        var elt = get('debug');
+        elt.value = msg + '\n' + elt.value;
+    }
+}
+
+/**
  * Initialize the workspace.
  */
 function init()
 {
+    if (debugOn) {
+        get('db').innerHTML = "<form name='debugForm'>" +
+                              "<textarea style='position:absolute;top:26px;right:10px;' id='debug' cols='50' rows='10'></textarea>" +
+                              "<input type='button' onclick='document.debugForm.debug.value=\"\";' value='clear' />" +
+                              "</form>";
+        get('debug').value = '';
+    }
+
     // preload the close image
     var closeImg = new Image();
-    closeImg.src = 'http://waganote.appspot.com/close.gif';
+    closeImg.src = 'http://localhost:8080/image/close.gif';
+
+    // a hack for safari compatability
+    if (BROWSER_SAFARI == browser) {
+        escape = myescape;
+        //unescape = myunescape;
+    }
+
+    var toolbar = get('toolbar');
+    //    toolbar.onmousedown = cancelBubble;
+    //    if (BROWSER_SAFARI == browser) {
+    //        toolbar.style.width = '100%';
+    //    }
 
     workspace.mouse.curPos = new Point();
     document.onmousemove = docMouseMove;
@@ -2662,8 +3027,18 @@ function init()
      */
     window.onbeforeunload = winBeforeUnload;
 
+    // set tooltips to localized text
+//    get('newImg').title = strings.ICON_NEW_NOTE;
+//    get('saveImg').title = strings.ICON_SAVE;
+//    get('reloadImg').title = strings.ICON_LOAD;
+//    get('undoImg').title = strings.HISTORY_UNDO_EMPTY;
+//    get('redoImg').title = strings.HISTORY_REDO_EMPTY;
+//    get('textfilter').title = strings.FILTER_TITLE;
+//    get('mini').title = strings.MINI_NO_NOTES;
+//    get('rsslink').title = strings.RSS_LINK_TITLE;
+
     // periodically check for updates (every 10 minutes)
-    //    window.setTimeout(workspace.checkUpdated, workspace.updateInterval);
+    window.setTimeout(workspace.checkUpdated, workspace.updateInterval);
 }
 
 function cancelBubble(e) {
@@ -2682,8 +3057,6 @@ function docMouseMove(e) {
         x = e.pageX;
         y = e.pageY;
     }
-    var xx = e.clientX;
-    var yy = e.clientY;
     workspace.mouse.update(x, y);
     workspace.docMove(x, y);
 }
@@ -2699,8 +3072,7 @@ function docMouseDown(e) {
     var curPos = workspace.mouse.curPos.copy();
     // get rel pos
     // make sure we're not on a scrollbar
-    var content = document.body;
-    if (curPos.x < content.clientWidth && curPos.y < content.clientHeight) {
+    if (curPos.x < document.body.clientWidth && curPos.y < document.body.clientHeight) {
         workspace.mouseDown = workspace.mouse.curPos.copy();
     }
 }
@@ -2760,6 +3132,15 @@ function docKeyDown(ev) {
             n = workspace.notes[workspace.topId];
             n.keyDown(ev);
         }
+        /* //not ready yet
+         else if ('E' == key) {
+         workspace.expose();
+         // swap the functionality with the undo effect
+         var tmp = workspace.expose;
+         workspace.expose = workspace._expose;
+         workspace._expose = tmp;
+         }
+         */
     } else if (workspace.shortcuts) { // in edit mode
         if (27 == ev.keyCode) { // Esc
             workspace.editOff();
@@ -2810,12 +3191,7 @@ function get(id) {
 }
 
 
-init();
-
-//script webnote end
-
-
-Array.prototype.contains = function (element) {
+init();Array.prototype.contains = function (element) {
     for (var i = 0; i < this.length; i++) {
         if (this[i] == element) {
             return true;
@@ -2894,7 +3270,7 @@ String.format = function(src){
         workspace.freshNotes.push(newNote);
     }
 
-    window['WN']['addNote'] = addNote;
+    window.WN.addNote = addNote;
 
     var errorHandler = function(tx, error) {
         console.log("!!" + error.message);
@@ -2910,7 +3286,7 @@ String.format = function(src){
 
         return largestId;
     }
-    window['WN']['getLargestId'] = getLargestId;
+    window.WN.getLargestId = getLargestId;
 
 
     function pointNextPosIfFirstPosHasOneNote(resultRows) {
@@ -2971,6 +3347,8 @@ String.format = function(src){
             alert('save successfully!');
         });
     }
+
+    window.WN.saveLocalDB = saveLocalDB;
 
     function getUpdateNotes() {
         var shouldUpdateNotes = [];
@@ -3053,43 +3431,66 @@ String.format = function(src){
 
         prepareDB();
         loadNotes();
+//
+//        var menuDivWaga = document.createElement('div');
+//        menuDivWaga.id = 'menuDivWaga';
+//        document.body.insertBefore(menuDivWaga, document.body.firstChild);
+//
+//        var menuUlWaga = document.createElement('ul');
+//        menuDivWaga.appendChild(menuUlWaga);
+//
+//        var addLiWaga = document.createElement('li');
+//        var addButtonWaga = document.createElement('input');
+//        addButtonWaga.type = 'button';
+//        addButtonWaga.id = 'addNote';
+//        addButtonWaga.value = 'Add Note';
+//        addButtonWaga.onclick = addNote;
+//        addLiWaga.appendChild(addButtonWaga);
+//
+//        var saveLiWaga = document.createElement('li');
+//        var saveButtonWaga = document.createElement('input');
+//        saveButtonWaga.type = 'button';
+//        saveButtonWaga.id = 'saveNote';
+//        saveButtonWaga.value = 'Save Notes';
+//        saveButtonWaga.onclick = saveLocalDB;
+//        saveLiWaga.appendChild(saveButtonWaga);
+//
+//        var clearLiWaga = document.createElement('li');
+//        var clearButtonWaga = document.createElement('input');
+//        clearButtonWaga.type = 'button';
+//        clearButtonWaga.id = 'clearNotes';
+//        clearButtonWaga.value = 'Clear Notes';
+//        clearButtonWaga.onclick = clearTable;
+//        clearLiWaga.appendChild(clearButtonWaga);
+//
+//        menuUlWaga.appendChild(addLiWaga);
+//        menuUlWaga.appendChild(saveLiWaga);
+//        menuUlWaga.appendChild(clearLiWaga);
 
-        var menuDivWaga = document.createElement('div');
-        menuDivWaga.id = 'menuDivWaga';
-        document.body.insertBefore(menuDivWaga, document.body.firstChild);
 
-        var menuUlWaga = document.createElement('ul');
-        menuDivWaga.appendChild(menuUlWaga);
 
-        var addLiWaga = document.createElement('li');
-        var addButtonWaga = document.createElement('input');
-        addButtonWaga.type = 'button';
-        addButtonWaga.id = 'addNote';
-        addButtonWaga.value = 'Add Note';
-        addButtonWaga.onclick = addNote;
-        addLiWaga.appendChild(addButtonWaga);
+        var tooBarDivWaga = document.createElement('div');
+        tooBarDivWaga.id = 'toolBarDivWaga';
+        document.body.insertBefore(tooBarDivWaga, document.body.firstChild);
 
-        var saveLiWaga = document.createElement('li');
-        var saveButtonWaga = document.createElement('input');
-        saveButtonWaga.type = 'button';
-        saveButtonWaga.id = 'saveNote';
-        saveButtonWaga.value = 'Save Notes';
-        saveButtonWaga.onclick = saveLocalDB;
-        saveLiWaga.appendChild(saveButtonWaga);
+        tooBarDivWaga.innerHTML = '<div class="controls">' +
+                                  '<img title="new note" id="newImg" src="http://waganote.appspot.com/image/new.gif" class="controls" onclick="WN.addNote();" alt="new note icon">' +
+                                  '<img title="save notes" id="saveImg" src="http://waganote.appspot.com/image/save.gif" class="controls" onclick="WN.saveLocalDB();" alt="disk icon (save)">' +
+                                  '<img title="clear notes" id="reloadImg" src="http://waganote.appspot.com/image/reload.gif" class="controls" onclick="WN.clearTable()" alt="clear notes">' +
+//                                  '<img title="delete note (14 actions)" id="undoImg" src="http://waganote.appspot.com/image/undo.gif" class="controls" onclick="workspace.history.undo()" alt="undo icon">' +
+//                                  '<img title="nothing to redo" id="redoImg" src="http://waganote.appspot.com/image/redo.gif" class="controlsDisabled" onclick="workspace.history.redo()" alt="redo icon">' +
+                                  '</div>' +
+                                  '<div id="filters">' +
+                                  '<input title="enter a regular expression to filter by" style="width: 50px; padding: 1px 2px;" id="textfilter" onchange="workspace.filter(this.value)" onkeydown="if(13==event.keyCode){workspace.filter(this.value);}; event.cancelBubble=true;">' +
+                                  '<br /><input style="width: 50px;" value="filter" type="button">' +
+                                  '</div>' +
+                                  '<div style="width: 51px;" title="showing all 1 notes" id="mini">' +
+                                  '</div>'; 
+//                                  '<div id="links">' +
+//                                  '<a title="rss feed of these notes" id="rsslink" href="http://www.aypwip.org/webnote/waga.xml"><img style="margin: 6px 2px; border: 0pt none; width: 19px; height: 9px;" src="http://waganote.appspot.com/image/minixml.gif"></a>' +
+//                                  '</div>';
+})();
 
-        var clearLiWaga = document.createElement('li');
-        var clearButtonWaga = document.createElement('input');
-        clearButtonWaga.type = 'button';
-        clearButtonWaga.id = 'clearNotes';
-        clearButtonWaga.value = 'Clear Notes';
-        clearButtonWaga.onclick = clearTable;
-        clearLiWaga.appendChild(clearButtonWaga);
-
-        menuUlWaga.appendChild(addLiWaga);
-        menuUlWaga.appendChild(saveLiWaga);
-        menuUlWaga.appendChild(clearLiWaga);
-
-})();    
 
 
 //wagadb script end

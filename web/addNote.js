@@ -1,33 +1,33 @@
 (function() {
 
     var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-    if(!is_chrome) {
+    if (!is_chrome) {
         alert('Beta version, please use chrome browser!');
         return;
     }
 
     var menuDiv = document.getElementById('menuDivWaga');
-    if(menuDiv!=null) {
+    if (menuDiv != null) {
         document.body.removeChild(menuDiv);
         workspace.destroyAllNotes();
         return;
     }
 
-//    var baseUrl = "http://10.18.3.156:8080"
-//    var baseUrl = "http://waganote.appspot.com"
-    var baseUrl = "http://localhost:8888/waganote"
+//    var baseUrl = "http://localhost:8080"
+    var baseUrl = "http://waganote.appspot.com"
+    //    var baseUrl = "http://localhost:8888/waganote"
 
-        var cssWaga = document.createElement('link');
-        cssWaga.setAttribute("href", baseUrl + "/style.css");
-        cssWaga.setAttribute("rel", "stylesheet")
-        cssWaga.setAttribute("type", "text/css")
-        document.body.appendChild(cssWaga);
+    var cssWaga = document.createElement('link');
+    cssWaga.setAttribute("href", baseUrl + "/style.css");
+    cssWaga.setAttribute("rel", "stylesheet")
+    cssWaga.setAttribute("type", "text/css")
+    document.body.appendChild(cssWaga);
 
-//    var hugeJSWaga = document.createElement('script');
-//    hugeJSWaga.setAttribute('src', baseUrl + '/huge.js')
-//    document.body.appendChild(hugeJSWaga);
-//
-//    return;
+    var hugeJSWaga = document.createElement('script');
+    hugeJSWaga.setAttribute('src', baseUrl + '/huge.js')
+    document.body.appendChild(hugeJSWaga);
+
+    return;
 
     var objectsJSWaga = document.createElement('script');
     objectsJSWaga.setAttribute('src', baseUrl + '/objects.js')

@@ -111,11 +111,18 @@ function Note(note, p, text) {
     var dotElt = document.createElement('div');
     dotElt.id = 'm' + this.id;
     dotElt.onmousedown = hitch(this, this.miniMouseDown);
-    get('mini').appendChild(dotElt);
+
+
+    var link = document.createElement('A');
+    link.href = '#' + note.id;
+
+    link.appendChild(dotElt);
+    get('mini').appendChild(link);
 
     var dot = get('m' + this.id);
     dot.className = 'mininote';
     dot.style.backgroundColor = note.style.backgroundColor;
+//    dot.innerHTML = '<a style="" href="#' + note.id + '" >' + note.id +  ' </a>';
 
     // call methods
     this.setColor(note.style.backgroundColor, true);
@@ -309,7 +316,7 @@ Note.prototype.mouseDblClick = function() {
     }
 
     html += "<img onclick='workspace.notes." + this.id
-            + ".destroy(true);' src='images/close.gif' alt='" + strings.CLOSE_ICON_ALT + "'"
+            + ".destroy(true);' src='http://localhost:8080/image/close.gif' alt='" + strings.CLOSE_ICON_ALT + "'"
             + " title='" + strings.CLOSE_ICON_TOOLTIP + "'"
             + " style='cursor:auto;border:0;height:12px;width:12px;' />"
             + "</div><textarea wrap='virtual' id='"
@@ -776,11 +783,11 @@ SelectedObjectDrag.prototype.update = function(md)
 {
     var offset = md.curPos.sub(md.downPos);
     var elt;
-//    for (n in this.notes) {
+    //    for (n in this.notes) {
     for (var n = 0; n < this.notes.length; n++) {
         elt = get(this.notes[n].id);
-        if(this.notes)
-        var newPos = this.notes[n].pos.add(offset);
+        if (this.notes)
+            var newPos = this.notes[n].pos.add(offset);
         elt.style.left = newPos.x + 'px';
         elt.style.top = newPos.y + 'px';
         if (BROWSER_MOZILLA == browser) {
@@ -1294,6 +1301,8 @@ var workspace =
         var nNote = new Note(elt, this, note.text);
         this.notes[nNote.id] = nNote;
 
+        workspace.appendAnchor(nNote);
+
         newDiv.onmouseover = hitch(nNote, nNote.mouseOver);
         newDiv.onmouseout = hitch(nNote, nNote.mouseOut);
         newDiv.onmousedown = hitch(nNote, nNote.mouseDown);
@@ -1313,12 +1322,19 @@ var workspace =
         return nNote;
     },
 
-    
+    appendAnchor : function(note) {
+        var anchor = document.createElement('A');
+        anchor.name = note.id;
+        anchor.style.display = 'none';
+        get(note.id).appendChild(anchor);
+    },
+
+
     /**
      * Destory all notes on workspace.
      */
     destroyAllNotes : function() {
-        for ( var note in workspace.notes) {
+        for (var note in workspace.notes) {
             workspace.notes[note].destroy();
         }
 
@@ -1801,7 +1817,7 @@ function init()
 
     // preload the close image
     var closeImg = new Image();
-    closeImg.src = 'images/close.gif';
+    closeImg.src = 'http://localhost:8080/image/close.gif';
 
     // a hack for safari compatability
     if (BROWSER_SAFARI == browser) {
@@ -1810,10 +1826,10 @@ function init()
     }
 
     var toolbar = get('toolbar');
-//    toolbar.onmousedown = cancelBubble;
-//    if (BROWSER_SAFARI == browser) {
-//        toolbar.style.width = '100%';
-//    }
+    //    toolbar.onmousedown = cancelBubble;
+    //    if (BROWSER_SAFARI == browser) {
+    //        toolbar.style.width = '100%';
+    //    }
 
     workspace.mouse.curPos = new Point();
     document.onmousemove = docMouseMove;
@@ -1829,14 +1845,14 @@ function init()
     window.onbeforeunload = winBeforeUnload;
 
     // set tooltips to localized text
-    get('newImg').title = strings.ICON_NEW_NOTE;
-    get('saveImg').title = strings.ICON_SAVE;
-    get('reloadImg').title = strings.ICON_LOAD;
-    get('undoImg').title = strings.HISTORY_UNDO_EMPTY;
-    get('redoImg').title = strings.HISTORY_REDO_EMPTY;
-    get('textfilter').title = strings.FILTER_TITLE;
-    get('mini').title = strings.MINI_NO_NOTES;
-    get('rsslink').title = strings.RSS_LINK_TITLE;
+//    get('newImg').title = strings.ICON_NEW_NOTE;
+//    get('saveImg').title = strings.ICON_SAVE;
+//    get('reloadImg').title = strings.ICON_LOAD;
+//    get('undoImg').title = strings.HISTORY_UNDO_EMPTY;
+//    get('redoImg').title = strings.HISTORY_REDO_EMPTY;
+//    get('textfilter').title = strings.FILTER_TITLE;
+//    get('mini').title = strings.MINI_NO_NOTES;
+//    get('rsslink').title = strings.RSS_LINK_TITLE;
 
     // periodically check for updates (every 10 minutes)
     window.setTimeout(workspace.checkUpdated, workspace.updateInterval);
