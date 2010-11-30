@@ -14,14 +14,21 @@
 </div>
 <p>
 
-<div id="postionDiv" class="note">test</div>
+<div id="postionDiv" class="note">Controller</div>
+<div style="width: 51px;" title="showing all 1 notes" id="mini"> </div>
+<div id="filters">
+            <input title="enter a regular expression to filter by" style="width: 135px; padding: 1px 2px;" id="textfilter" onchange="workspace.filter(this.value)" onkeydown="if(13==event.keyCode){workspace.filter(this.value);}; event.cancelBubble=true;">
+            <!-- this button is strictly for looks -->
+            <input style="width: 50px;" value="filter" type="button">
+        </div>
 </p>
 <br>
 <link href="style.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="strings.js"></script>
 <script type="text/javascript" src="objects.js"></script>
 <script type="text/javascript" src="urchin.js"></script>
-<script type="text/javascript" src="webnote.js"></script>
+<!--<script type="text/javascript" src="webnote.js"></script>-->
+<script type="text/javascript" src="webnote-full.js"></script>
 <script type="text/javascript" src="waga.js"></script>
 <script type="text/javascript" src="wagadb.js"></script>
 <script type="text/javascript">

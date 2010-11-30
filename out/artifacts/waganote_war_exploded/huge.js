@@ -13,14 +13,14 @@ var strings = {
   CLOSE_ICON_ALT: 'close button',
   CLOSE_ICON_TOOLTIP: 'delete this note',
 
-  HISTORY_CREATE_NOTE: 'create note',
+  HISTORY_CREATE_NOTE: 'create note',  
   HISTORY_MOVE_NOTE: 'move note',
   HISTORY_MOVE_NOTES: 'move notes',
   HISTORY_DELETE_NOTE: 'delete note',
   HISTORY_CHANGE_NOTE_COLOR: 'change color',
   HISTORY_RESIZE_NOTE: 'resize note',
   HISTORY_EDIT_NOTE: 'edit note',
-
+  
   HISTORY_UNDO_EMPTY: 'nothing to undo',
   HISTORY_REDO_EMPTY: 'nothing to redo',
   // $1 is the action action tooltip, $2 is the number of actions
@@ -45,7 +45,7 @@ var strings = {
 
   BOOKMARKLET_TEXT: 'This is a bookmarklet for quickly adding new notes.  Right click on the link and add it as a bookmark.  You can now quickly create a note by selecting text on any webpage and then clicking your bookmark.',
   BOOKMARKLET_NAME: 'new note',
-
+  
   LOADVERSIONS_ABOUT: 'If you wish to load a previous version of this workspace, select the time from the list and press load.',
   LOADVERSIONS_OLDER: 'older',
   LOADVERSIONS_NEWER: 'newer',
@@ -54,14 +54,14 @@ var strings = {
   LOADVERSIONS_NONE: 'No versions found.  No notes have been saved to this workspace.',
 
   COLLISION_WARNING: "This workspace has been changed by someone else while you were working on it.  If you want to see what the workspace looks like now, you can <a href='$1' target='_new'>open it in a new window</a>.",
-
+  
   SAVE_STATUS_ERROR: 'Failed to save notes.  Please make sure you have an internet connection and try again.',
   // $1 is the email address of the admin
   SAVE_SERVER_ERROR: 'Failed to save notes.  There is a problem with the server.  Please try again in a few minutes.  If the problem persists, please send an email to $1.'
 };
 
 
-
+//strings script end
 
 
 /**
@@ -140,7 +140,7 @@ function findRelativeMousePos(ev) {
     pagePos = new Point(ev.clientX + document.body.scrollLeft,
                         ev.clientY + document.body.scrollTop);
   }
-
+    
   return pagePos.sub(targetPos);
 }
 
@@ -216,7 +216,7 @@ Point.prototype.toString = function() { return '(' + this.x + ', ' + this.y + ')
 function ColorHSV(rgb)
 {
   var r = rgb.r / 255.0; var g = rgb.g / 255.0; var b = rgb.b / 255.0;
-
+  
   var min = Math.min(r, g, b); var max = Math.max(r, g, b);
   this.v = max;
   var delta = max - min;
@@ -294,7 +294,7 @@ ColorHSV.prototype.toColor = function()
 ColorHSV.prototype.adj = function(h, s, v)
 {
   this.h += h; this.s += s; this.v += v;
-
+  
   if (h < 0)
     h += 360.0;
   if (h > 360)
@@ -421,7 +421,7 @@ MyDate.prototype.toString = function()
 
 function isEsc(s)
 {
-  return !( (s >= 48 && s <= 57) || (s >= 65 && s <= 90)
+  return !( (s >= 48 && s <= 57) || (s >= 65 && s <= 90) 
             || (s >=97 && s <=122) || s == 95);
 }
 /**
@@ -479,6 +479,7 @@ function myunescape(s)
 }
 
 
+//objects script end
 
 
 //-- Google Analytics Urchin Module
@@ -623,7 +624,7 @@ function urchinTracker(page) {
   _ufns=1;
  } else if (a>=0 && b>=0 && c>=0) {
    b = _uGC(dc,"__utmb="+_udh,";");
-   b = ("-" == b) ? _udh : b;
+   b = ("-" == b) ? _udh : b;  
   _ubd.cookie="__utmb="+b+"; path="+_utcp+";"+x+_udo;
  } else {
   if (a>=0) a=_uFixA(_ubd.cookie,";",_ust);
@@ -1035,7 +1036,7 @@ function _uDomain() {
   }
   _udn=d;
  }
- _udn = _udn.toLowerCase();
+ _udn = _udn.toLowerCase(); 
  if (_uhash=="off") return 1;
  return _uHash(_udn);
 }
@@ -1084,8 +1085,8 @@ function __utmVisitorCode(f) {
  var r=0,t=0,i=0,i2=0,m=31;
  var a=_uGC(_ubd.cookie,"__utma="+_udh+".",";");
  if ((i=a.indexOf(".",0))<0) return;
- if ((i2=a.indexOf(".",i+1))>0) r=a.substring(i+1,i2); else return "";
- if ((i=a.indexOf(".",i2+1))>0) t=a.substring(i2+1,i); else return "";
+ if ((i2=a.indexOf(".",i+1))>0) r=a.substring(i+1,i2); else return "";  
+ if ((i=a.indexOf(".",i2+1))>0) t=a.substring(i2+1,i); else return "";  
  if (f) {
   return r;
  } else {
@@ -1153,7 +1154,7 @@ function _uCO() {
  sc.type='text/javascript';
  sc.id="_gasojs";
  sc.src='https://'+d+'/analytics/reporting/overlay_js?gaso='+_utk+'&'+Math.random();
- document.getElementsByTagName('head')[0].appendChild(sc);
+ document.getElementsByTagName('head')[0].appendChild(sc);  
 }
 function _uGT() {
  var h=location.hash, a;
@@ -1167,8 +1168,8 @@ function _uGT() {
 var _utk=_uGT();
 if (_utk && _utk!="" && _utk.length>10 && _utk.indexOf("=")==-1) {
  if (window.addEventListener) {
-  window.addEventListener('load', _uCO, false);
- } else if (window.attachEvent) {
+  window.addEventListener('load', _uCO, false); 
+ } else if (window.attachEvent) { 
   window.attachEvent('onload', _uCO);
  }
 }
@@ -1177,6 +1178,8 @@ function _uNx() {
   return (new Date((new Date()).getTime()+63072000000)).toGMTString();
 }
 
+
+//urchin script end
 
 /**
  * @fileoverview The Webnote specific classes.<br /><br />
@@ -1442,6 +1445,8 @@ Note.prototype.mouseDblClick = function() {
     pSize.y -= 2 * (noteBorder + notePadding + 1) + 20;
     var html = "<div style='text-align:right;margin: 0 2px 1px 0;'>"
 
+    var rangleWidth = pSize.x - 175;
+
     // color swatches here
     for (var c in bgColors) {
         var tooltip = strings.COLOR_SWATCH_TOOLTIP.replace('$1', parseInt(c, 10) + 1);
@@ -1453,12 +1458,13 @@ Note.prototype.mouseDblClick = function() {
     }
 
     html += "<input id='opacityRange' title='Adjust opacity' value='" + this.opacity + "' onchange='workspace.notes." + this.id +
-            ".adjustOpacity();' type='range' min='0.4' max='1' step='0.1' width='50px' onmousedown='event.cancelBubble=true;' onmousemove='event.cancelBubble=true;' />";
+            ".adjustOpacity();' type='range' min='0.4' max='1' step='0.1' style='width:" + rangleWidth +
+            "px;padding-bottom:2px;' onmousedown='event.cancelBubble=true;' onmousemove='event.cancelBubble=true;' />";
 
-    html += "<img class='wagaCloseNoteImg' onclick='workspace.notes." + this.id
+    html += "<img onclick='workspace.notes." + this.id
             + ".destroy(true);' src='http://waganote.appspot.com/close.gif' alt='" + strings.CLOSE_ICON_ALT + "'"
             + " title='" + strings.CLOSE_ICON_TOOLTIP + "'"
-            + " style='cursor:auto;border:0;height:12px;width:12px;' />"
+            + " style='cursor:auto;border:1;height:10px;width:10px;padding-bottom:8px;' />"
             + "</div><textarea wrap='virtual' id='"
             + this.id + "text' style='width:" + pSize.x
             + "px;height:" + pSize.y + "px' onmousedown='event.cancelBubble=true;' ondblclick='event.cancelBubble=true;'>"
@@ -1810,10 +1816,9 @@ var Mouse =
         if (this.selObj) // something already selected
             return;
 
-        if (get(note.id).style.cursor != "move")
-        //      this.selObj = new SelectedObjectResize(note, this.notePosRel);
-            console.log('yong css3');
-        else
+        if (get(note.id).style.cursor != "move"){
+            this.selObj = new SelectedObjectResize(note, this.notePosRel);
+        }else
         {
             if (ev.altKey)
             {
@@ -2038,6 +2043,8 @@ SelectedObjectResize.prototype.update = function(md)
         edit.style.height = Math.max(pSize.y, 10) + 'px';
         edit.style.width = Math.max(pSize.x, 10) + 'px';
     }
+
+//    get('opacityRange').style.width = (parseInt(elt.style.width) - 175) + 'px';
 
     this.note.updateSize();
 };
@@ -2363,7 +2370,7 @@ var workspace =
 
         if (!('height' in note) || note.height == null) note.height = 150;
         if (!('width' in note) || note.width == null) note.width = 250;
-
+        
         var pos;
         if (!('xPos' in note) || !('yPos' in note)) {
             pos = this.notePos.nextPos(note.width, note.height);
@@ -2805,6 +2812,8 @@ function get(id) {
 
 init();
 
+//script webnote end
+
 
 Array.prototype.contains = function (element) {
     for (var i = 0; i < this.length; i++) {
@@ -2832,6 +2841,8 @@ String.format = function(src){
         return args[i];
     });
 };
+
+//waga script end
 
 
 (function() {
@@ -3078,7 +3089,11 @@ String.format = function(src){
         menuUlWaga.appendChild(saveLiWaga);
         menuUlWaga.appendChild(clearLiWaga);
 
-})();
+})();    
+
+
+//wagadb script end
+
 
 
 

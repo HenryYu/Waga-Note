@@ -262,6 +262,8 @@ Note.prototype.mouseDblClick = function() {
     pSize.y -= 2 * (noteBorder + notePadding + 1) + 20;
     var html = "<div style='text-align:right;margin: 0 2px 1px 0;'>"
 
+    var rangleWidth = pSize.x - 175;
+
     // color swatches here
     for (var c in bgColors) {
         var tooltip = strings.COLOR_SWATCH_TOOLTIP.replace('$1', parseInt(c, 10) + 1);
@@ -272,13 +274,14 @@ Note.prototype.mouseDblClick = function() {
                 + tooltip + "'></div>";
     }
 
-    html += "<input id='opacityRange' title='Adjust opacity' value='" + this.opacity + "' onchange='workspace.notes." + this.id + 
-            ".adjustOpacity();' type='range' min='0.4' max='1' step='0.1' width='50px' onmousedown='event.cancelBubble=true;' onmousemove='event.cancelBubble=true;' />";
+    html += "<input id='opacityRange' title='Adjust opacity' value='" + this.opacity + "' onchange='workspace.notes." + this.id +
+            ".adjustOpacity();' type='range' min='0.4' max='1' step='0.1' style='width:" + rangleWidth +
+            "px;padding-bottom:2px;' onmousedown='event.cancelBubble=true;' onmousemove='event.cancelBubble=true;' />";
 
     html += "<img onclick='workspace.notes." + this.id
             + ".destroy(true);' src='http://waganote.appspot.com/close.gif' alt='" + strings.CLOSE_ICON_ALT + "'"
             + " title='" + strings.CLOSE_ICON_TOOLTIP + "'"
-            + " style='cursor:auto;border:0;height:12px;width:12px;' />"
+            + " style='cursor:auto;border:1;height:10px;width:10px;padding-bottom:8px;' />"
             + "</div><textarea wrap='virtual' id='"
             + this.id + "text' style='width:" + pSize.x
             + "px;height:" + pSize.y + "px' onmousedown='event.cancelBubble=true;' ondblclick='event.cancelBubble=true;'>"
@@ -630,10 +633,9 @@ var Mouse =
         if (this.selObj) // something already selected
             return;
 
-        if (get(note.id).style.cursor != "move")
-        //      this.selObj = new SelectedObjectResize(note, this.notePosRel);
-            console.log('yong css3');
-        else
+        if (get(note.id).style.cursor != "move"){
+            this.selObj = new SelectedObjectResize(note, this.notePosRel);
+        }else
         {
             if (ev.altKey)
             {
@@ -858,6 +860,8 @@ SelectedObjectResize.prototype.update = function(md)
         edit.style.height = Math.max(pSize.y, 10) + 'px';
         edit.style.width = Math.max(pSize.x, 10) + 'px';
     }
+
+//    get('opacityRange').style.width = (parseInt(elt.style.width) - 175) + 'px';
 
     this.note.updateSize();
 };
@@ -1624,5 +1628,7 @@ function get(id) {
 
 
 init();
+
+//script webnote end
 
 

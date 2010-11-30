@@ -62,6 +62,8 @@ var strings = {
 
 
 //strings script end
+
+
 /**
  * @fileoverview A few generic objects and functions used by webnote.
  */
@@ -478,6 +480,8 @@ function myunescape(s)
 
 
 //objects script end
+
+
 //-- Google Analytics Urchin Module
 //-- Copyright 2007 Google, All Rights Reserved.
 
@@ -1175,7 +1179,9 @@ function _uNx() {
 }
 
 
-//urchin script end/**
+//urchin script end
+
+/**
  * @fileoverview The Webnote specific classes.<br /><br />
  *
  * The two main classes are {@link workspace} and {@link Note}.
@@ -2806,6 +2812,8 @@ function get(id) {
 
 init();
 
+//script webnote end
+
 
 Array.prototype.contains = function (element) {
     for (var i = 0; i < this.length; i++) {
@@ -2834,7 +2842,10 @@ String.format = function(src){
     });
 };
 
-//waga script end(function() {
+//waga script end
+
+
+(function() {
 
     if (!window.WN) {
         window['WN'] = {}
@@ -3082,6 +3093,9 @@ String.format = function(src){
 
 
 //wagadb script end
+
+
+
 
 
 
