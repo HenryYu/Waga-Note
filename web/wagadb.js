@@ -251,9 +251,9 @@
         document.body.insertBefore(tooBarDivWaga, document.body.firstChild);
 
         tooBarDivWaga.innerHTML = '<div class="controls">' +
-                                  '<img title="new note" id="newImg" src="http://waganote.appspot.com/image/new.gif" class="controls" onclick="WN.addNote();" alt="new note icon">' +
-                                  '<img title="save notes" id="saveImg" src="http://waganote.appspot.com/image/save.gif" class="controls" onclick="WN.saveLocalDB();" alt="disk icon (save)">' +
-                                  '<img title="clear notes" id="reloadImg" src="http://waganote.appspot.com/image/reload.gif" class="controls" onclick="WN.clearTable()" alt="clear notes">' +
+                                  '<img title="new note" id="newImg" src="http://10.18.8.175:8080/app/Waga-Note/web/image/new.gif" class="controls" onclick="WN.addNote();" alt="new note icon">' +
+                                  '<img title="save notes" id="saveImg" src="http://10.18.8.175:8080/app/Waga-Note/web/image/save.gif" class="controls" onclick="WN.saveLocalDB();" alt="disk icon (save)">' +
+                                  '<img title="clear notes" id="reloadImg" src="http://10.18.8.175:8080/app/Waga-Note/web/image/reload.gif" class="controls" onclick="WN.clearTable()" alt="clear notes">' +
 //                                  '<img title="delete note (14 actions)" id="undoImg" src="http://waganote.appspot.com/image/undo.gif" class="controls" onclick="workspace.history.undo()" alt="undo icon">' +
 //                                  '<img title="nothing to redo" id="redoImg" src="http://waganote.appspot.com/image/redo.gif" class="controlsDisabled" onclick="workspace.history.redo()" alt="redo icon">' +
                                   '</div>' +

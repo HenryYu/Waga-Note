@@ -316,7 +316,7 @@ Note.prototype.mouseDblClick = function() {
     }
 
     html += "<img onclick='workspace.notes." + this.id
-            + ".destroy(true);' src='http://waganote.appspot.com/image/close.gif' alt='" + strings.CLOSE_ICON_ALT + "'"
+            + ".destroy(true);' src='http://10.18.8.175:8080/app/Waga-Note/web/image/close.gif' alt='" + strings.CLOSE_ICON_ALT + "'"
             + " title='" + strings.CLOSE_ICON_TOOLTIP + "'"
             + " style='cursor:auto;border:0;height:12px;width:12px;' />"
             + "</div><textarea wrap='virtual' id='"
@@ -1819,7 +1819,7 @@ function init()
 
     // preload the close image
     var closeImg = new Image();
-    closeImg.src = 'http://waganote.appspot.com/image/close.gif';
+    closeImg.src = 'http://10.18.8.175:8080/app/Waga-Note/web/image/close.gif';
 
     // a hack for safari compatability
     if (BROWSER_SAFARI == browser) {

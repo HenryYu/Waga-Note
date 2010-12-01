@@ -6,7 +6,7 @@
         return;
     }
 
-    var menuDiv = document.getElementById('menuDivWaga');
+    var menuDiv = document.getElementById('toolBarDivWaga');
     if (menuDiv != null) {
         document.body.removeChild(menuDiv);
         workspace.destroyAllNotes();
@@ -14,7 +14,8 @@
     }
 
 //    var baseUrl = "http://localhost:8080"
-    var baseUrl = "http://waganote.appspot.com"
+    var baseUrl = "http://10.18.8.175:8080/app/Waga-Note/web"
+//    var baseUrl = "http://waganote.appspot.com"
     //    var baseUrl = "http://localhost:8888/waganote"
 
     var cssWaga = document.createElement('link');
