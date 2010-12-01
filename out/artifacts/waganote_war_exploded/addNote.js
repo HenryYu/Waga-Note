@@ -6,7 +6,7 @@
         return;
     }
 
-    var menuDiv = document.getElementById('menuDivWaga');
+    var menuDiv = document.getElementById('toolBarDivWaga');
     if (menuDiv != null) {
         document.body.removeChild(menuDiv);
         workspace.destroyAllNotes();

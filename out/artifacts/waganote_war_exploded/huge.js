@@ -1499,7 +1499,7 @@ Note.prototype.mouseDblClick = function() {
     }
 
     html += "<img onclick='workspace.notes." + this.id
-            + ".destroy(true);' src='http://localhost:8080/image/close.gif' alt='" + strings.CLOSE_ICON_ALT + "'"
+            + ".destroy(true);' src='http://waganote.appspot.com/image/close.gif' alt='" + strings.CLOSE_ICON_ALT + "'"
             + " title='" + strings.CLOSE_ICON_TOOLTIP + "'"
             + " style='cursor:auto;border:0;height:12px;width:12px;' />"
             + "</div><textarea wrap='virtual' id='"
@@ -2305,6 +2305,8 @@ var workspace =
     freshNotes : [],
 
     deleteNotes: [],
+
+    baseZIndex : 900,
     /**
      * When creating new notes, we sometimes need to assign a random name to
      * it.  The first random note is note0, the second is note1, etc.
@@ -2467,7 +2469,7 @@ var workspace =
 
         if (!('zIndex' in note)) {
             this.reZOrder();
-            elt.style.zIndex = this.numNotes + 1;
+            elt.style.zIndex = this.baseZIndex + this.numNotes + 1;
             this.topId = note.id;
         } else {
             elt.style.zIndex = note.zIndex;
@@ -2608,11 +2610,11 @@ var workspace =
             for (i = 0; i < nArray.length; ++i) {
                 if (nArray[i].id == topNoteID) {
                     found = 1;
-                    get(nArray[i].id).style.zIndex = this.numNotes;
+                    get(nArray[i].id).style.zIndex = this.baseZIndex + this.numNotes;
                     this.topId = nArray[i].id;
                 }
                 else
-                    get(nArray[i].id).style.zIndex = i + 1 - found;
+                    get(nArray[i].id).style.zIndex = this.baseZIndex + i + 1 - found;
             }
         }
     },
@@ -3000,7 +3002,7 @@ function init()
 
     // preload the close image
     var closeImg = new Image();
-    closeImg.src = 'http://localhost:8080/image/close.gif';
+    closeImg.src = 'http://waganote.appspot.com/image/close.gif';
 
     // a hack for safari compatability
     if (BROWSER_SAFARI == browser) {
@@ -3474,9 +3476,9 @@ String.format = function(src){
         document.body.insertBefore(tooBarDivWaga, document.body.firstChild);
 
         tooBarDivWaga.innerHTML = '<div class="controls">' +
-                                  '<img title="new note" id="newImg" src="http://waganote.appspot.com/image/new.gif" class="controls" onclick="WN.addNote();" alt="new note icon">' +
-                                  '<img title="save notes" id="saveImg" src="http://waganote.appspot.com/image/save.gif" class="controls" onclick="WN.saveLocalDB();" alt="disk icon (save)">' +
-                                  '<img title="clear notes" id="reloadImg" src="http://waganote.appspot.com/image/reload.gif" class="controls" onclick="WN.clearTable()" alt="clear notes">' +
+                                  '<img title="new note" id="newImg" src="http://localhost:8080/image/new.gif" class="controls" onclick="WN.addNote();" alt="new note icon">' +
+                                  '<img title="save notes" id="saveImg" src="http://localhost:8080/image/save.gif" class="controls" onclick="WN.saveLocalDB();" alt="disk icon (save)">' +
+                                  '<img title="clear notes" id="reloadImg" src="http://localhost:8080/image/reload.gif" class="controls" onclick="WN.clearTable()" alt="clear notes">' +
 //                                  '<img title="delete note (14 actions)" id="undoImg" src="http://waganote.appspot.com/image/undo.gif" class="controls" onclick="workspace.history.undo()" alt="undo icon">' +
 //                                  '<img title="nothing to redo" id="redoImg" src="http://waganote.appspot.com/image/redo.gif" class="controlsDisabled" onclick="workspace.history.redo()" alt="redo icon">' +
                                   '</div>' +

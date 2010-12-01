@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="websocket">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../tools/jetty-8/lib/jetty-websocket-8.0.0.M1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -16,16 +16,12 @@
   </component>
   <component name="ChangeListManager" verified="true">
     <list default="true" readonly="true" id="b4699323-d469-47c4-aede-2a9af5f606a6" name="Default" comment=" add full function into test page.">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/web/util/merge_huge_js.rb" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/addNote.js" afterPath="$PROJECT_DIR$/web/addNote.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/huge.js" afterPath="$PROJECT_DIR$/web/huge.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/util/merge_huge_js.sh" afterPath="$PROJECT_DIR$/web/util/merge_huge_js.sh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/webnote-full.js" afterPath="$PROJECT_DIR$/web/webnote-full.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/websocket.xml" />
     </list>
-    <ignored path="waganote.iws" />
-    <ignored path=".idea/workspace.xml" />
     <ignored path="out/" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path="waganote.iws" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,71 +77,79 @@
   </component>
   <component name="FileColors" enabled="true" enabledForTabs="true" />
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="webnote-full.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/webnote-full.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1624" column="20" selection-start="47738" selection-end="47754" vertical-scroll-proportion="0.25691056">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="5" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/test.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="43" selection-start="796" selection-end="803" vertical-scroll-proportion="-8.105263">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addNote.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/addNote.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="0" selection-start="430" selection-end="430" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="merge_huge_js.sh" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/util/merge_huge_js.sh">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="15" selection-start="354" selection-end="354" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="huge.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/huge.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2781" column="40" selection-start="82453" selection-end="82453" vertical-scroll-proportion="-5.8846154">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wagadb.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/wagadb.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="27" selection-start="586" selection-end="597" vertical-scroll-proportion="23.076923">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="vertical" split-proportion="0.7836257">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/web/style.css">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="39" column="18" selection-start="692" selection-end="692" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/web/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="60" column="11" selection-start="1700" selection-end="1700" vertical-scroll-proportion="0.8717949">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="webnote.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/web/webnote.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="1237" column="101" selection-start="35385" selection-end="35385" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="webnote-full.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/web/webnote-full.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="318" column="94" selection-start="9352" selection-end="9352" vertical-scroll-proportion="-59.076923">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="wagadb.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/web/wagadb.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="256" column="86" selection-start="9015" selection-end="9015" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="addNote.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/web/addNote.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="16" column="0" selection-start="433" selection-end="494" vertical-scroll-proportion="0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="webnote.js" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/web/webnote.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="1362" column="53" selection-start="39335" selection-end="39335" vertical-scroll-proportion="0.115384616">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -165,10 +169,10 @@
         <option value="$PROJECT_DIR$/web/util/merge_huge_js.rb" />
         <option value="$PROJECT_DIR$/web/test.html" />
         <option value="$PROJECT_DIR$/web/bookmark.txt" />
-        <option value="$PROJECT_DIR$/web/style.css" />
-        <option value="$PROJECT_DIR$/web/wagadb.js" />
         <option value="$PROJECT_DIR$/web/util/merge_huge_js.sh" />
+        <option value="$PROJECT_DIR$/web/style.css" />
         <option value="$PROJECT_DIR$/web/huge.js" />
+        <option value="$PROJECT_DIR$/web/wagadb.js" />
         <option value="$PROJECT_DIR$/web/webnote-full.js" />
         <option value="$PROJECT_DIR$/web/addNote.js" />
       </list>
@@ -211,12 +215,19 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Favorites" />
-      <pane id="ProjectPane">
-        <subPane />
-      </pane>
       <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="waganote" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Favorites" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -234,8 +245,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RunManager" selected="Google AppEngine Dev Server.app server">
     <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" break_at_first_line="false" browser="DEFAULT" class_file="" class="" config_file="" directory="" file="" is_config_by_xml="false" is_groups_set="false" method_class="" method_file="" method="" open_page_automatically="false" scope="Class" stop_session_after_first_page="true" web_path="">
@@ -449,11 +460,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="22" width="1276" height="778" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3230994" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="BSFConsole" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
@@ -467,10 +477,11 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18923327" sideWeight="0.8479532" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32894737" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18923327" sideWeight="0.7426901" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24707602" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3230994" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -486,7 +497,7 @@
     <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
     <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="add merge huge.js script." />
+    <option name="LAST_COMMIT_MESSAGE" value="Change base url to http://10.18.8.175:8080." />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -502,6 +513,8 @@
     <MESSAGE value="1. Edit index.html page.&#10;2. Add readme page." />
     <MESSAGE value="1. make opacity rangle extentable" />
     <MESSAGE value="add merge huge.js script." />
+    <MESSAGE value="1. Add close.gif from server.2. set zindex property as 900." />
+    <MESSAGE value="Change base url to http://10.18.8.175:8080." />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -550,11 +563,11 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/web/webnote-full.js</url>
-          <line>1833</line>
+          <line>1835</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/web/webnote-full.js</url>
-          <line>1306</line>
+          <line>1308</line>
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -572,13 +585,6 @@
     <entry file="file://$PROJECT_DIR$/README">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="39" selection-start="1119" selection-end="1119" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="20" selection-start="1644" selection-end="1644" vertical-scroll-proportion="-0.6315789">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/strings.js">
@@ -601,65 +607,66 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/webnote.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1272" column="6" selection-start="36123" selection-end="36491" vertical-scroll-proportion="17.521276">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/bookmark.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="6" selection-start="167" selection-end="336" vertical-scroll-proportion="0.029339854">
-          <folding />
-        </state>
+        <state line="1" column="6" selection-start="167" selection-end="336" vertical-scroll-proportion="0.029339854" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/style.css">
+    <entry file="file://$PROJECT_DIR$/web/test.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="5" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="21" column="43" selection-start="796" selection-end="803" vertical-scroll-proportion="0.24758843" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/wagadb.js">
+    <entry file="file://$PROJECT_DIR$/web/huge.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="27" selection-start="586" selection-end="597" vertical-scroll-proportion="23.076923">
+        <state line="3481" column="44" selection-start="105911" selection-end="105911" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/util/merge_huge_js.sh">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="15" selection-start="354" selection-end="354" vertical-scroll-proportion="0.0">
+        <state line="12" column="15" selection-start="354" selection-end="354" vertical-scroll-proportion="0.2868526">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/addNote.js">
+    <entry file="file://$PROJECT_DIR$/web/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="0" selection-start="430" selection-end="430" vertical-scroll-proportion="0.0">
+        <state line="39" column="18" selection-start="692" selection-end="692" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/wagadb.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="256" column="86" selection-start="9015" selection-end="9015" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/test.html">
+    <entry file="file://$PROJECT_DIR$/web/webnote.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="43" selection-start="796" selection-end="803" vertical-scroll-proportion="-8.105263">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web/huge.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2781" column="40" selection-start="82453" selection-end="82453" vertical-scroll-proportion="-5.8846154">
+        <state line="1237" column="101" selection-start="35385" selection-end="35385" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/webnote-full.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1624" column="20" selection-start="47738" selection-end="47754" vertical-scroll-proportion="0.25691056">
+        <state line="318" column="94" selection-start="9352" selection-end="9352" vertical-scroll-proportion="-59.076923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/addNote.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="433" selection-end="494" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="60" column="11" selection-start="1700" selection-end="1700" vertical-scroll-proportion="0.8717949">
           <folding />
         </state>
       </provider>
